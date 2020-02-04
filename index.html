@@ -1,12 +1,73 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cherry Trees</title>
-</head>
-<body>
-    <p> This shit sucks</p>
-</body>
+<html>
+ <head>
+ <title>My First Leaflet Map</title>
+ <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+ integrity="sha512-
+puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrD
+h+drA=="
+ crossorigin=""/>
+ <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+ integrity="sha512-
+QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw
+5lwrg=="
+ crossorigin=""></script>
+ </head>
+ <body>
+      <h1>Cherries Y'all</h1>
+      <h2>Where they bloomin at?</h2>
+      <h4>A project by Nick Furigay</h4>
+      <div class="container">
+             <div id="mapid"></div>
+
+       </div>
+    
+    <style>
+
+
+          body{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+          }
+        #mapid{ 
+              width: 900px;
+               height: 500px;
+               opacity: 1;
+            transform: opacity 2s; 
+                }
+      </style>
+      <script src="./flowering_cherries_4326.geojson"></script>
+       
+       <script>
+
+
+       var map = L.map('mapid').setView([35.91, -79.05], 17);
+       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).addTo(map);
+      L.marker([35.911271, -79.049807]).addTo(map)
+      // .bindPopup('I LOVE COMP SCI') 
+      // .openPopup();
+      
+      // create custom icon variable
+ var uncIcon = L.icon({ // notice the L.icon which is a Leaflet object with properties
+ iconUrl: './chamdring.png',
+ // this points to a jpg image obtained from the internet
+ iconSize: [50,50], // size of the icon
+ popupAnchor: [0,0] // where the icon is located relative to the lat lon of the point.
+ });
+//YOU COULD CHANGE the iconURL, iconSize and popupAnchor to see how the map changes
+// create an HTML variable that will pop up with a UNC Well photo
+var customPopup = "Cherrys Here";
+// YOU COULD CHANGE the https link to another picture.
+// YOU COULD CHANGE the 100px to other values like 50px or 400px to see what happens
+// the following line should go at the end, before script closing tag
+L.geoJSON(cherries, { // a
+pointToLayer: function (feature, latlng) { // b
+return L.marker(latlng, {icon: uncIcon});}}) // c
+.bindPopup(customPopup) // d
+.addTo(map); // 
+      </script>
+
+
+ </body>
 </html>
